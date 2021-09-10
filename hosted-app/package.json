@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec next dev",
+    "prebuild": "cd ../react-yaml && yarn prepare",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
