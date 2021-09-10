@@ -1,9 +1,11 @@
+// eslint-disable @next/next/no-img-element
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import YamlEditor from '@focus-reactive/react-yaml';
 import { oneDark } from "@codemirror/theme-one-dark";
+// @ts-ignore
+import YamlEditor from '@focus-reactive/react-yaml';
 
 const obj = {
   company: 'FocusReactive',
