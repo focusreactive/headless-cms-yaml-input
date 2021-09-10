@@ -1,0 +1,4 @@
+{
+  "private": true,
+  "workspaces": ["react-yaml", "graphcms-yaml-input", "contentful-yaml-input", "sanity-yaml-input"]
+}

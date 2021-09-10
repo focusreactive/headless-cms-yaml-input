@@ -1,0 +1,49 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["airbnb", "plugin:prettier/recommended", "next/core-web-vitals"],
+  "ignorePatterns": [
+    ".linaria-cache",
+    ".next",
+    ".vscode",
+    "node_modules",
+    "out",
+    "public",
+    "localStorage.js",
+    "scripts"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "globals": { "process": "readonly" },
+  "rules": {
+    "import/order": "off",
+    "import/no-unresolved": "off",
+    "linebreak-style": "off",
+    "react/jsx-filename-extension": "off",
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-underscore-dangle": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "react/no-array-index-key": "off",
+    "react/no-danger": [0],
+    "react/react-in-jsx-scope": "off",
+    "react/destructuring-assignment": "off",
+    "import/prefer-default-export": "off",
+    "no-plusplus": "off",
+    "react/button-has-type": "off"
+  }
+}
