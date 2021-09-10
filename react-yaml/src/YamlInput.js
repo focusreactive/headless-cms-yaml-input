@@ -6,6 +6,7 @@ import { keymap, Range, Decoration } from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
 import { StateField, StateEffect } from '@codemirror/state';
 import { Tooltip, hoverTooltip } from '@codemirror/tooltip';
+import { oneDark } from '@codemirror/theme-one-dark';
 
 // Effects can be attached to transactions to communicate with the extension
 const addMarks = StateEffect.define();
@@ -93,7 +94,7 @@ const YamlInput = ({
       handleTabs && keymap.of([indentWithTab]),
       markFieldExtension,
       errorHover,
-      theme,
+      oneDark,
     ].filter(Boolean);
 
     const state = EditorState.create({

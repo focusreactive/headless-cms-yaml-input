@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "next dev",
+    "dev:watch": "nodemon --exec yarn prepare",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

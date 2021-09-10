@@ -78,10 +78,9 @@ const YamlEditor = ({
   return (
     <YamlInput
       value={currentText || textValue}
-      theme={theme}
       onChange={handleChange}
       error={errors.error}
-      options={{ handleTabs: true }}
+      options={{ handleTabs: true, theme }}
     />
   );
 };
