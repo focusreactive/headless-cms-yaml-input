@@ -7,10 +7,17 @@ import { indentWithTab } from '@codemirror/commands';
 import { StateField, StateEffect } from '@codemirror/state';
 import { Tooltip, hoverTooltip } from '@codemirror/tooltip';
 import { zebraStripes } from './extensions/zebra-stripes';
+import { errorStripe } from './extensions/error-stripe';
 
 // Effects can be attached to transactions to communicate with the extension
 const addMarks = StateEffect.define();
 const filterMarks = StateEffect.define();
+
+const myTheme = EditorView.theme({
+  '.cm-activeLine': {
+    backgroundColor: '#88888847',
+  },
+});
 
 // This value must be added to the set of extensions to enable this
 const markFieldExtension = StateField.define({
@@ -26,11 +33,9 @@ const markFieldExtension = StateField.define({
     // eslint-disable-next-line no-restricted-syntax
     for (const effect of tr.effects) {
       if (effect.is(addMarks)) {
-        console.log('🚀 addMarks\n', addMarks, effect.value);
         newValue = newValue.update({ add: effect.value, sort: true });
       }
       if (effect.is(filterMarks)) {
-        console.log('🚀 filterMarks\n', filterMarks, effect.value);
         newValue = newValue.update({ filter: effect.value });
       }
     }
@@ -51,6 +56,7 @@ const YamlInput = ({
   onChange = () => null,
   error,
   options: { theme = undefined, handleTabs = false } = {},
+  getErrorPos,
 }) => {
   const mount = React.useRef(null);
   const view = React.useRef(null);
@@ -105,14 +111,16 @@ const YamlInput = ({
 
   const initEditor = () => {
     const extensions = [
+      myTheme,
       basicSetup,
       StreamLanguage.define(yaml),
       EditorView.updateListener.of(handleChange),
       handleTabs && keymap.of([indentWithTab]),
       markFieldExtension,
       errorHover,
-      zebraStripes({ step: 2 }),
-      theme,
+      errorStripe(getErrorPos),
+      zebraStripes(),
+      // theme,
     ].filter(Boolean);
 
     const state = EditorState.create({
@@ -120,6 +128,7 @@ const YamlInput = ({
       extensions,
     });
     view.current = new EditorView({ state, parent: mount?.current });
+    window.view = view.current;
   };
 
   React.useEffect(() => {

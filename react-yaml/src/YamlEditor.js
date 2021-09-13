@@ -59,11 +59,24 @@ const YamlEditor = ({
     }
   };
 
+  const getErrorPos = (newText) => {
+    try {
+      yaml.load(newText);
+      return {};
+    } catch (err) {
+      if (!err.mark?.snippet) {
+        return {};
+      }
+      return { position: err.mark.position };
+    }
+  };
+
   return (
     <YamlInput
       value={currentText.current}
       onChange={handleChange}
       error={errors.error}
+      getErrorPos={getErrorPos}
       options={{ handleTabs: true, theme }}
     />
   );

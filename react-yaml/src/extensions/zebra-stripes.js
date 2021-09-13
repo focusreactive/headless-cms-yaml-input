@@ -9,12 +9,12 @@ import { Facet } from '@codemirror/state';
 import { RangeSetBuilder } from '@codemirror/rangeset';
 
 const baseTheme = EditorView.baseTheme({
-  '&light .cm-zebraStripe': { backgroundColor: '#f4fafa' },
-  '&dark .cm-zebraStripe': { backgroundColor: '#1a2727' },
+  '&light .cm-zebraStripe': { backgroundColor: '#f4fafa40' },
+  '&dark .cm-zebraStripe': { backgroundColor: '#1a272740' },
 });
 
 const stepSize = Facet.define({
-  combine: (values) => (values.length ? Math.min(...values) : 2),
+  combine: (val) => val[0],
 });
 
 const stripe = Decoration.line({
@@ -53,9 +53,6 @@ const showStripes = ViewPlugin.fromClass(
 );
 
 export function zebraStripes(options = {}) {
-  return [
-    baseTheme,
-    options.step == null ? [] : stepSize.of(options.step),
-    showStripes,
-  ];
+  window.stepSize = stepSize;
+  return [baseTheme, stepSize.of(options?.step || 2), showStripes];
 }
