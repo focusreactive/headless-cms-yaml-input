@@ -23,45 +23,35 @@ const useErrors = (onError) => {
 };
 
 const YamlEditor = ({
-  value,
+  json,
+  text,
   theme,
   onError = () => {},
   onChange = () => {},
 }) => {
-  // const [error, setError] = React.useState(null);
   const errors = useErrors(onError);
-  const [currentText, setCurrentText] = React.useState('');
-  const textValue = yaml.dump(value);
+  const textValue = json ? yaml.dump(json) : text;
+  const currentText = React.useRef(textValue);
+  // const [currentText, setCurrentText] = React.useState(textValue);
 
-  const handleChange = (text) => {
+  const handleChange = (newText) => {
     try {
-      // setCurrentText(text);
-      const json = yaml.load(text);
-      errors.cleanErrors();
-      console.log('🍎 Result', json);
+      currentText.current = newText;
+      const newJson = yaml.load(newText);
+      if (errors.hasErrors) {
+        errors.cleanErrors();
+        onError(null);
+      }
 
-      onChange(json);
-      onError(false);
-      // if (error) {
-      //   // editor.getAllMarks().forEach((m) => m.clear());
-      //   // setError(null);
-      // }
+      onChange({ json: newJson, text: newText });
     } catch (err) {
+      onError(err);
       console.error(err.mark.snippet);
       errors.markError({
         position: err.mark.position,
         message: err.message,
         snippet: err.mark.snippet,
       });
-      // setError(err);
-      // const errLineNumber = err.mark.line;
-      // editor.doc.markText(
-      //   { line: errLineNumber, ch: 0 },
-      //   { line: errLineNumber },
-      //   { className: 'error-line' },
-      // );
-      // window.editor = editor;
-      // window.data = data;
     }
   };
 
@@ -77,7 +67,7 @@ const YamlEditor = ({
 
   return (
     <YamlInput
-      value={currentText || textValue}
+      value={currentText.current}
       onChange={handleChange}
       error={errors.error}
       options={{ handleTabs: true, theme }}

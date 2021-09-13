@@ -3,7 +3,11 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb", "plugin:prettier/recommended", "next/core-web-vitals"],
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "next/core-web-vitals"
+  ],
   "ignorePatterns": [
     ".next",
     ".vscode",
@@ -12,6 +16,7 @@
     "public",
     "scripts"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -19,10 +24,35 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react"],
-  "globals": { "process": "readonly" },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "globals": {
+    "process": "readonly"
+  },
   "rules": {
-    "import/order": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "peerDependencies": true,
+        "devDependencies": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ],
     "import/no-unresolved": "off",
     "linebreak-style": "off",
     "react/jsx-filename-extension": "off",
@@ -33,11 +63,16 @@
     "no-console": [
       "error",
       {
-        "allow": ["warn", "error"]
+        "allow": [
+          "warn",
+          "error"
+        ]
       }
     ],
     "react/no-array-index-key": "off",
-    "react/no-danger": [0],
+    "react/no-danger": [
+      0
+    ],
     "react/react-in-jsx-scope": "off",
     "react/destructuring-assignment": "off",
     "import/prefer-default-export": "off",

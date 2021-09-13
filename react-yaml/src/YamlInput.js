@@ -55,7 +55,7 @@ const YamlInput = ({
   const currentValue = React.useRef(value);
 
   const handleChange = (viewUpdate) => {
-    const newValue = viewUpdate.state.doc;
+    const newValue = viewUpdate.state.doc.toString();
 
     if (newValue !== currentValue.current) {
       currentValue.current = newValue;
@@ -67,17 +67,12 @@ const YamlInput = ({
     // const { from, to, text } = view.state.doc.lineAt(pos);
     const hasErrors = view.state.field(markFieldExtension)?.size;
     if (!hasErrors) {
-      console.log('no error');
       return null;
     }
     return {
       pos,
       above: true,
       create(view) {
-        console.log(
-          '🚀 ~ file: YamlInput.js ~ line 46 ~ errorHover ~ view',
-          view,
-        );
         const dom = document.createElement('div');
         dom.style = 'width: 100px; height: 100px';
         dom.textContent = 'error';
@@ -94,7 +89,7 @@ const YamlInput = ({
       handleTabs && keymap.of([indentWithTab]),
       markFieldExtension,
       errorHover,
-      oneDark,
+      // oneDark,
     ].filter(Boolean);
 
     const state = EditorState.create({
@@ -112,39 +107,29 @@ const YamlInput = ({
     }
     initEditor();
 
-    return () => view.current.destroy();
+    return () => {
+      view.current.destroy();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
-  React.useEffect(
-    () => {
-      if (!error) {
-        console.log('🚀 clear errors', error);
-        view.current.dispatch({
-          effects: filterMarks.of((from, to) => false),
-        });
-        return;
-      }
-
-      const textLength = view.current.state.doc.length;
-      const fromPosition =
-        error.position + 1 <= textLength - 1
-          ? error.position
-          : error.position - 1;
-      const toPosition = fromPosition + 1;
-      console.log('🚀 textLength', {
-        textLength,
-        fromPosition,
-        toPosition,
-        'error.position': error.position,
-        'relly?': error.position + 1 <= textLength - 1,
-      });
-
+  React.useEffect(() => {
+    if (!error) {
       view.current.dispatch({
-        effects: addMarks.of([errorMark.range(fromPosition, toPosition)]),
+        effects: filterMarks.of((from, to) => false),
       });
-    } /* [error] */,
-  );
+      return;
+    }
+
+    const textLength = view.current.state.doc.length;
+    const fromPosition =
+      error.position + 1 <= textLength - 1 ? error.position : textLength - 1;
+    const toPosition = fromPosition + 1;
+
+    view.current.dispatch({
+      effects: addMarks.of([errorMark.range(fromPosition, toPosition)]),
+    });
+  }, [error]);
 
   return <div ref={mount} />;
 };

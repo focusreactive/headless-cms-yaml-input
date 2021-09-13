@@ -1,11 +1,10 @@
 {
-  "name": "@focus-reactive/react-yaml",
+  "name": "@focus-reactive/contentful-yaml-input",
   "version": "0.1.0",
-  "private": false,
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "private": true,
   "scripts": {
-    "dev": "next dev",
+    "predev": "cd ../react-yaml && yarn prepare",
+    "dev": "nodemon --exec next dev",
     "dev:watch": "nodemon --exec yarn prepare",
     "build": "next build",
     "start": "next start",
@@ -13,16 +12,10 @@
     "prepare": "package-prepare"
   },
   "dependencies": {
-    "@codemirror/basic-setup": "^0.19.0",
-    "@codemirror/commands": "^0.19.3",
-    "@codemirror/lang-javascript": "^0.19.1",
-    "@codemirror/legacy-modes": "^0.19.0",
-    "@codemirror/state": "^0.19.1",
-    "@codemirror/stream-parser": "^0.19.2",
-    "@codemirror/theme-one-dark": "^0.19.0",
-    "@codemirror/tooltip": "^0.19.2",
-    "@codemirror/view": "^0.19.4",
-    "js-yaml": "^4.1.0"
+    "@focus-reactive/react-yaml": "^0.1.0",
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.4",
@@ -50,9 +43,9 @@
   "peerDependencies": {
     "react": "*"
   },
-  "homepage": "https://github.com/focusreactive/headless-cms-yaml-input/react-yaml",
+  "homepage": "https://github.com/focusreactive/headless-cms-yaml-input/contentful-yaml-input",
   "bugs": {
-    "url": "https://github.com/focusreactive/headless-cms-yaml-input/react-yaml/issues"
+    "url": "https://github.com/focusreactive/headless-cms-yaml-input/contentful-yaml-input/issues"
   },
   "author": "Oleg Proskurin <oleg@focusreactive.com> (https://github.com/focusreactive)",
   "license": "MIT",
@@ -77,6 +70,10 @@
     "custom-field",
     "codemirror",
     "js-yaml",
-    "react-yaml"
+    "react-yaml",
+    "contentful",
+    "headless",
+    "cms",
+    "custom input"
   ]
 }
