@@ -1,3 +1,4 @@
+import { oneDark } from '@codemirror/theme-one-dark';
 import YamlEditor from '../src';
 
 const obj = {
@@ -25,7 +26,11 @@ const obj = {
 export default function Home() {
   return (
     <div>
-      <YamlEditor value={obj} />
+      <YamlEditor
+        json={obj}
+        onChange={(value) => console.log('on change: ', value)}
+        theme={oneDark}
+      />
     </div>
   );
 }

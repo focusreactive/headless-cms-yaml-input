@@ -1,49 +1,52 @@
 // eslint-disable @next/next/no-img-element
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import * as React from "react";
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
 import { oneDark } from "@codemirror/theme-one-dark";
 // @ts-ignore
-import YamlEditor from '@focus-reactive/react-yaml';
+import YamlEditor from "@focus-reactive/react-yaml";
 
 const obj = {
-  company: 'FocusReactive',
-  description: 'Trusted React/Node.js Experts',
-  url: 'https://focusreactive.com/',
-  info:
-`WE PROVIDE STARTUPS AND
+  company: "FocusReactive",
+  description: "Trusted React/Node.js Experts",
+  url: "https://focusreactive.com/",
+  info: `WE PROVIDE STARTUPS AND
 SCALEUP BUSINESSES
 WITH HANDS-ON TECHNICAL LEADERSHIP
 AND HIGH-PERFORMING ENGINEERING TEAMS
   `.toLowerCase(),
   articles: [
     {
-      title: 'STORYBOOK ADDON CONSOLE'.toLowerCase(),
-      url: 'https://focusreactive.com/addon-console/'
+      title: "STORYBOOK ADDON CONSOLE".toLowerCase(),
+      url: "https://focusreactive.com/addon-console/",
     },
     {
-      title: 'HEADLESS CMS (CONTENTFUL) AND NEXTJS, PART 1. HOW TO CREATE A MODERN REACT APPLICATION?'.toLowerCase(),
-      url: 'https://focusreactive.com/contentfull-part1/'
+      title:
+        "HEADLESS CMS (CONTENTFUL) AND NEXTJS, PART 1. HOW TO CREATE A MODERN REACT APPLICATION?".toLowerCase(),
+      url: "https://focusreactive.com/contentfull-part1/",
     },
     {
-      title: 'HEADLESS ECOMMERCE - EVERYTHING YOU NEED TO KNOW'.toLowerCase(),
-      url: 'https://focusreactive.com/headless-ecommerce-everything-you-need-to-know/'
+      title: "HEADLESS ECOMMERCE - EVERYTHING YOU NEED TO KNOW".toLowerCase(),
+      url: "https://focusreactive.com/headless-ecommerce-everything-you-need-to-know/",
     },
     {
-      title: 'THE NEW ERA TECH - JAMSTACK'.toLowerCase(),
-      url: 'https://focusreactive.com/jamstack-the-new-era-tech/'
+      title: "THE NEW ERA TECH - JAMSTACK".toLowerCase(),
+      url: "https://focusreactive.com/jamstack-the-new-era-tech/",
     },
     {
-      title: 'THINK HEADLESS CMS ARE NOT CUSTOMIZABLE? WE DISPROVED THIS USING SANITY'.toLowerCase(),
-      url: 'https://focusreactive.com/sanity-customization/'
+      title:
+        "THINK HEADLESS CMS ARE NOT CUSTOMIZABLE? WE DISPROVED THIS USING SANITY".toLowerCase(),
+      url: "https://focusreactive.com/sanity-customization/",
     },
     {
-      title: 'PREVIEW GRAPHQL DATA IN A COMFY WAY - STORYBOOK GRAPHQL KIT'.toLowerCase(),
-      url: 'https://focusreactive.com/storybook-graphql-kit/'
+      title:
+        "PREVIEW GRAPHQL DATA IN A COMFY WAY - STORYBOOK GRAPHQL KIT".toLowerCase(),
+      url: "https://focusreactive.com/storybook-graphql-kit/",
     },
-  ]
-}
+  ],
+};
 
 const Home: NextPage = () => {
   return (
@@ -59,7 +62,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <div className={styles.editor}>
-          <YamlEditor value={obj} theme={oneDark}/>
+          <YamlEditor json={obj} theme={oneDark} />
         </div>
       </main>
 
@@ -70,11 +73,16 @@ const Home: NextPage = () => {
           rel="noopener noreferrer"
         >
           <span className="footer-note">Powered by</span>
-            <img src="https://raw.githubusercontent.com/focusreactive/storybook-graphql-kit/master/docs/focusreactive-logo.svg" alt="FocusReactive Logo" width={200} height={60} />
+          <img
+            src="https://raw.githubusercontent.com/focusreactive/storybook-graphql-kit/master/docs/focusreactive-logo.svg"
+            alt="FocusReactive Logo"
+            width={200}
+            height={60}
+          />
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

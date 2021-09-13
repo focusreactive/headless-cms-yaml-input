@@ -1,5 +1,6 @@
 {
-  "watch": ["../react-yaml/src/"],
+  "watch": ["../react-yaml/dist/", "../graphcms-yaml-input/dist/"],
   "ext": "js,tsx",
-  "ignore": ["__tests__/**/"]
+  "ignore": ["__tests__/**/"],
+  "delay": 2000
 }

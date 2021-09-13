@@ -1,35 +1,34 @@
 {
-  "name": "@focus-reactive/react-yaml",
+  "name": "@focus-reactive/graphcms-yaml-input",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "dev": "next dev",
-    "dev:watch": "nodemon --exec yarn prepare",
-    "build": "next build",
+    "predev": "cd ../react-yaml && yarn prepare",
+    "dev": "nodemon --exec next dev",
+    "dev:watch": "nodemon --exec yarn tsc -p ./src",
+    "build": "yarn clean && tsc -p ./src",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "package-prepare"
+    "clean": "rm -rf dist",
+    "prepare": "yarn build"
   },
   "dependencies": {
-    "@codemirror/basic-setup": "^0.19.0",
-    "@codemirror/commands": "^0.19.3",
-    "@codemirror/lang-javascript": "^0.19.1",
-    "@codemirror/legacy-modes": "^0.19.0",
-    "@codemirror/rangeset": "^0.19.1",
-    "@codemirror/state": "^0.19.1",
-    "@codemirror/stream-parser": "^0.19.2",
-    "@codemirror/theme-one-dark": "^0.19.0",
-    "@codemirror/tooltip": "^0.19.2",
-    "@codemirror/view": "^0.19.4",
-    "js-yaml": "^4.1.0"
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@focus-reactive/react-yaml": "^0.1.0",
+    "@graphcms/uix-react-sdk": "^0.1.4",
+    "@graphcms/uix-sdk": "^0.1.4",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.4",
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
+    "@types/react": "17.0.20",
     "@usulpro/package-prepare": "^1.3.1",
     "babel-eslint": "^10.1.0",
     "eslint": "7.32.0",
@@ -46,14 +45,15 @@
     "nodemon": "^2.0.12",
     "prettier": "^2.0.5",
     "react": "^17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "typescript": "4.4.3"
   },
   "peerDependencies": {
     "react": "*"
   },
-  "homepage": "https://github.com/focusreactive/headless-cms-yaml-input/react-yaml",
+  "homepage": "https://github.com/focusreactive/headless-cms-yaml-input/graphcms-yaml-input",
   "bugs": {
-    "url": "https://github.com/focusreactive/headless-cms-yaml-input/react-yaml/issues"
+    "url": "https://github.com/focusreactive/headless-cms-yaml-input/graphcms-yaml-input/issues"
   },
   "author": "Oleg Proskurin <oleg@focusreactive.com> (https://github.com/focusreactive)",
   "license": "MIT",
@@ -78,6 +78,10 @@
     "custom-field",
     "codemirror",
     "js-yaml",
-    "react-yaml"
+    "react-yaml",
+    "graphcms",
+    "headless",
+    "cms",
+    "custom input"
   ]
 }
