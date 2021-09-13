@@ -6,7 +6,7 @@ import { keymap, Range, Decoration } from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
 import { StateField, StateEffect } from '@codemirror/state';
 import { Tooltip, hoverTooltip } from '@codemirror/tooltip';
-import { oneDark } from '@codemirror/theme-one-dark';
+import { zebraStripes } from './extensions/zebra-stripes';
 
 // Effects can be attached to transactions to communicate with the extension
 const addMarks = StateEffect.define();
@@ -58,9 +58,8 @@ const YamlInput = ({
 
   const handleErrors = () => {
     view.current.dispatch({
-      effects: filterMarks.of((from, to) => false),
+      effects: filterMarks.of(() => false),
     });
-    console.log('clean up errors');
 
     if (!error?.position) {
       return;
@@ -84,9 +83,8 @@ const YamlInput = ({
       handleErrors();
       onChange(newValue);
     }
-
-    window.handleErrors = handleErrors;
   };
+
   const errorHover = hoverTooltip((view, pos, side) => {
     // const { from, to, text } = view.state.doc.lineAt(pos);
     const hasErrors = view.state.field(markFieldExtension)?.size;
@@ -113,7 +111,8 @@ const YamlInput = ({
       handleTabs && keymap.of([indentWithTab]),
       markFieldExtension,
       errorHover,
-      // oneDark,
+      zebraStripes({ step: 2 }),
+      theme,
     ].filter(Boolean);
 
     const state = EditorState.create({
@@ -121,8 +120,6 @@ const YamlInput = ({
       extensions,
     });
     view.current = new EditorView({ state, parent: mount?.current });
-    window.view = view.current;
-    window.markFieldExtension = markFieldExtension;
   };
 
   React.useEffect(() => {
@@ -137,7 +134,7 @@ const YamlInput = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
-  React.useEffect(handleErrors /* [error, error?.position] */);
+  React.useEffect(handleErrors);
 
   return <div ref={mount} />;
 };

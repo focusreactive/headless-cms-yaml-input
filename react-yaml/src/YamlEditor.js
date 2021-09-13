@@ -59,16 +59,6 @@ const YamlEditor = ({
     }
   };
 
-  const handlePrettify = () => {
-    setCurrentText('');
-  };
-
-  const handleUndo = () => {
-    setCurrentText('');
-    setError(null);
-    onError(false);
-  };
-
   return (
     <YamlInput
       value={currentText.current}
