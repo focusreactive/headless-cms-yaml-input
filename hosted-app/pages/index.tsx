@@ -62,7 +62,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <div className={styles.editor}>
-          <YamlEditor value={obj} theme={oneDark} />
+          <YamlEditor json={obj} theme={oneDark} />
         </div>
       </main>
 

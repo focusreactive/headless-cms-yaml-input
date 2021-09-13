@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build:dependencies": "cd ../react-yaml && yarn prepare && cd ../graphcms-yaml-input && yarn prepare",
     "dev": "nodemon --exec next dev",
-    "prebuild": "cd ../react-yaml && yarn prepare",
+    "prebuild": "yarn build:dependencies",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

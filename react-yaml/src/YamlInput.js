@@ -26,9 +26,11 @@ const markFieldExtension = StateField.define({
     // eslint-disable-next-line no-restricted-syntax
     for (const effect of tr.effects) {
       if (effect.is(addMarks)) {
+        console.log('🚀 addMarks\n', addMarks, effect.value);
         newValue = newValue.update({ add: effect.value, sort: true });
       }
       if (effect.is(filterMarks)) {
+        console.log('🚀 filterMarks\n', filterMarks, effect.value);
         newValue = newValue.update({ filter: effect.value });
       }
     }
@@ -54,15 +56,37 @@ const YamlInput = ({
   const view = React.useRef(null);
   const currentValue = React.useRef(value);
 
+  const handleErrors = () => {
+    view.current.dispatch({
+      effects: filterMarks.of((from, to) => false),
+    });
+    console.log('clean up errors');
+
+    if (!error?.position) {
+      return;
+    }
+
+    const textLength = view.current.state.doc.length;
+    const fromPosition =
+      error?.position + 1 <= textLength - 1 ? error.position : textLength - 1;
+    const toPosition = fromPosition + 1;
+
+    view.current.dispatch({
+      effects: addMarks.of([errorMark.range(fromPosition, toPosition)]),
+    });
+  };
+
   const handleChange = (viewUpdate) => {
     const newValue = viewUpdate.state.doc.toString();
 
     if (newValue !== currentValue.current) {
       currentValue.current = newValue;
+      handleErrors();
       onChange(newValue);
     }
-  };
 
+    window.handleErrors = handleErrors;
+  };
   const errorHover = hoverTooltip((view, pos, side) => {
     // const { from, to, text } = view.state.doc.lineAt(pos);
     const hasErrors = view.state.field(markFieldExtension)?.size;
@@ -113,23 +137,7 @@ const YamlInput = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
-  React.useEffect(() => {
-    if (!error) {
-      view.current.dispatch({
-        effects: filterMarks.of((from, to) => false),
-      });
-      return;
-    }
-
-    const textLength = view.current.state.doc.length;
-    const fromPosition =
-      error.position + 1 <= textLength - 1 ? error.position : textLength - 1;
-    const toPosition = fromPosition + 1;
-
-    view.current.dispatch({
-      effects: addMarks.of([errorMark.range(fromPosition, toPosition)]),
-    });
-  }, [error]);
+  React.useEffect(handleErrors /* [error, error?.position] */);
 
   return <div ref={mount} />;
 };

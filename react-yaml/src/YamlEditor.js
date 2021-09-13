@@ -46,6 +46,10 @@ const YamlEditor = ({
       onChange({ json: newJson, text: newText });
     } catch (err) {
       onError(err);
+      if (!err.mark?.snippet) {
+        console.error(err);
+        return;
+      }
       console.error(err.mark.snippet);
       errors.markError({
         position: err.mark.position,
