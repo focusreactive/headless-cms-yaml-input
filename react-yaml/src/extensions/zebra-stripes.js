@@ -9,8 +9,8 @@ import { Facet } from '@codemirror/state';
 import { RangeSetBuilder } from '@codemirror/rangeset';
 
 const baseTheme = EditorView.baseTheme({
-  '&light .cm-zebraStripe': { backgroundColor: '#f4fafa40' },
-  '&dark .cm-zebraStripe': { backgroundColor: '#1a272740' },
+  '&light .cm-zebraStripe': { backgroundColor: '#f4fafa' },
+  '&dark .cm-zebraStripe': { backgroundColor: '#1a2727' },
 });
 
 const stepSize = Facet.define({

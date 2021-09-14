@@ -15,7 +15,7 @@ const filterMarks = StateEffect.define();
 
 const myTheme = EditorView.theme({
   '.cm-activeLine': {
-    backgroundColor: '#88888847',
+    backgroundColor: '#5973bb2e',
   },
 });
 
@@ -120,7 +120,7 @@ const YamlInput = ({
       errorHover,
       errorStripe(getErrorPos),
       zebraStripes(),
-      // theme,
+      theme,
     ].filter(Boolean);
 
     const state = EditorState.create({
