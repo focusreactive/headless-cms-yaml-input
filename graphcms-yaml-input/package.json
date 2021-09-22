@@ -1,7 +1,6 @@
 {
   "name": "@focus-reactive/graphcms-yaml-input",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
@@ -51,9 +50,9 @@
   "peerDependencies": {
     "react": "*"
   },
-  "homepage": "https://github.com/focusreactive/headless-cms-yaml-input/graphcms-yaml-input",
+  "homepage": "https://github.com/focusreactive/headless-cms-yaml-input/tree/master/graphcms-yaml-input",
   "bugs": {
-    "url": "https://github.com/focusreactive/headless-cms-yaml-input/graphcms-yaml-input/issues"
+    "url": "https://github.com/focusreactive/headless-cms-yaml-input/tree/master/graphcms-yaml-input/issues"
   },
   "author": "Oleg Proskurin <oleg@focusreactive.com> (https://github.com/focusreactive)",
   "license": "MIT",
