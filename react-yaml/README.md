@@ -18,7 +18,21 @@ const handleChange = (value) => {
   // { foo: 'bar' }
 }
 
-return <YamlEditor value={obj} onChange={handleChange} />
+return <YamlEditor json={obj} onChange={handleChange} />
+```
+
+```jsx
+const text = `
+foo: bar
+`;
+
+const handleChange = (value) => {
+  console.log(value);
+  // { foo: 'bar' }
+}
+
+return <YamlEditor text={text} onChange={handleChange} />
+
 ```
 
 ## Features
