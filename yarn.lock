@@ -1327,6 +1327,23 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@focus-reactive/react-yaml@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@focus-reactive/react-yaml/-/react-yaml-0.1.0.tgz#0f526228c2a3a4147cc17248c5a81bf13c4b54d1"
+  integrity sha512-czjTbPyW4FaWGs7HCwsUaqXx1k0IvDTcv81xujIxVW9+T1m5h6p+mkQpKX6bwFi2DTMkQIoDHZWs58AAYHGKBg==
+  dependencies:
+    "@codemirror/basic-setup" "^0.19.0"
+    "@codemirror/commands" "^0.19.3"
+    "@codemirror/lang-javascript" "^0.19.1"
+    "@codemirror/legacy-modes" "^0.19.0"
+    "@codemirror/state" "^0.19.1"
+    "@codemirror/stream-parser" "^0.19.2"
+    "@codemirror/theme-one-dark" "^0.19.0"
+    "@codemirror/tooltip" "^0.19.2"
+    "@codemirror/view" "^0.19.4"
+    "@usulpro/package-prepare" "^1.3.1"
+    js-yaml "^4.1.0"
+
 "@graphcms/uix-react-sdk@^0.1.4":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/@graphcms/uix-react-sdk/-/uix-react-sdk-0.1.4.tgz#6a7d5b29ce12038ccb8938ee840fe8b4f4fac925"

@@ -8,9 +8,6 @@
     "usulpro"
   ],
   "workbench.colorCustomizations": {
-    "editorGroup.border": "#c0bd0d",
-    "panel.border": "#c0bd0d",
-    "sideBar.border": "#c0bd0d",
     "statusBar.background": "#c0bd0d",
     "statusBar.border": "#c0bd0d",
     "statusBar.debuggingBackground": "#0d10c0",
@@ -22,7 +19,10 @@
     "titleBar.activeForeground": "#15202b",
     "titleBar.border": "#c0bd0d",
     "titleBar.inactiveBackground": "#c0bd0d99",
-    "titleBar.inactiveForeground": "#15202b99"
+    "titleBar.inactiveForeground": "#15202b99",
+    "sash.hoverBorder": "#c0bd0d",
+    "statusBarItem.remoteBackground": "#c0bd0d",
+    "statusBarItem.remoteForeground": "#15202b"
   },
   "peacock.color": "#c0bd0d"
 }

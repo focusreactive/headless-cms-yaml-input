@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"name": "headless-cms-yaml-input",
+			"path": "."
+		},
+		{
+			"name": "contentful-yaml-input",
+			"path": "contentful-yaml-input"
+		},
+		{
+			"name": "graphcms-yaml-input",
+			"path": "graphcms-yaml-input"
+		},
+		{
+			"name": "react-yaml",
+			"path": "react-yaml"
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"statusBar.background": "#c0bd0d",
+			"statusBar.border": "#c0bd0d",
+			"statusBar.debuggingBackground": "#0d10c0",
+			"statusBar.debuggingBorder": "#0d10c0",
+			"statusBar.debuggingForeground": "#e7e7e7",
+			"statusBar.foreground": "#15202b",
+			"statusBarItem.hoverBackground": "#908e0a",
+			"titleBar.activeBackground": "#c0bd0d",
+			"titleBar.activeForeground": "#15202b",
+			"titleBar.border": "#c0bd0d",
+			"titleBar.inactiveBackground": "#c0bd0d99",
+			"titleBar.inactiveForeground": "#15202b99",
+			"sash.hoverBorder": "#c0bd0d",
+			"statusBarItem.remoteBackground": "#c0bd0d",
+			"statusBarItem.remoteForeground": "#15202b"
+		},
+		"peacock.color": "#c0bd0d"
+	}
+}
