@@ -86,10 +86,17 @@ const ResetEditedText = () => {
 };
 
 export default function Home() {
+  const [value, setValue] = React.useState(obj);
+
+  const handleChange = ({ json, text }) => {
+    setValue(json);
+  };
+
   return (
     <div>
       <KeepEditingText />
       <ResetEditedText />
+      {/* <YamlEditor json={value} onChange={handleChange} theme={oneDark} /> */}
     </div>
   );
 }

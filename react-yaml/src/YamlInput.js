@@ -1,11 +1,16 @@
 import React from 'react';
-import { StreamLanguage } from '@codemirror/stream-parser';
+import { StreamLanguage } from '@codemirror/language';
 import { yaml } from '@codemirror/legacy-modes/mode/yaml';
 import { EditorView, EditorState, basicSetup } from '@codemirror/basic-setup';
-import { keymap, Range, Decoration } from '@codemirror/view';
+import {
+  keymap,
+  Range,
+  Decoration,
+  Tooltip,
+  hoverTooltip,
+} from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
 import { StateField, StateEffect } from '@codemirror/state';
-import { Tooltip, hoverTooltip } from '@codemirror/tooltip';
 import { zebraStripes } from './extensions/zebra-stripes';
 import { errorStripe } from './extensions/error-stripe';
 
@@ -111,15 +116,15 @@ const YamlInput = ({
 
   const initEditor = () => {
     const extensions = [
-      myTheme,
-      basicSetup,
-      StreamLanguage.define(yaml),
-      EditorView.updateListener.of(handleChange),
-      handleTabs && keymap.of([indentWithTab]),
-      markFieldExtension,
-      errorHover,
-      errorStripe(getErrorPos),
-      zebraStripes(),
+      // myTheme,
+      // basicSetup,
+      // StreamLanguage.define(yaml),
+      // EditorView.updateListener.of(handleChange),
+      // handleTabs && keymap.of([indentWithTab]),
+      // markFieldExtension,
+      // errorHover,
+      // errorStripe(getErrorPos),
+      // zebraStripes(),
       // theme,
     ].filter(Boolean);
 

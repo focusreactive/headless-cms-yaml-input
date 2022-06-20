@@ -5,8 +5,7 @@ import {
   ViewPlugin,
   DecorationSet,
 } from '@codemirror/view';
-import { Facet } from '@codemirror/state';
-import { RangeSetBuilder } from '@codemirror/rangeset';
+import { Facet, RangeSetBuilder } from '@codemirror/state';
 
 const baseTheme = EditorView.baseTheme({
   '&light .cm-zebraStripe': { backgroundColor: '#f4fafa' },

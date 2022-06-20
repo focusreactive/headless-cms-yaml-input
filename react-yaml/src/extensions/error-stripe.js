@@ -6,7 +6,7 @@ import {
   ViewPlugin,
   DecorationSet,
 } from '@codemirror/view';
-import { RangeSetBuilder } from '@codemirror/rangeset';
+import { RangeSetBuilder } from '@codemirror/state';
 
 const baseTheme = EditorView.baseTheme({
   '.cm-errorStripe': { backgroundColor: '#ff390040 !important' },

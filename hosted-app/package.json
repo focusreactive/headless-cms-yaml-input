@@ -11,9 +11,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@codemirror/theme-one-dark": "^0.19.0",
-    "@focus-reactive/react-yaml": "^1.0.0",
+    "@codemirror/theme-one-dark": "^6.0.0",
     "@focus-reactive/graphcms-yaml-input": "^1.0.0",
+    "@focus-reactive/react-yaml": "^1.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
