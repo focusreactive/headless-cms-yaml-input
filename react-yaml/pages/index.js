@@ -24,7 +24,7 @@ const obj = {
   newLine: 'blasdf\nblaslsls\n',
 };
 
-const FollowByText = () => {
+const KeepEditingText = () => {
   const [textValue, setTextValue] = React.useState('');
 
   const handleChange = ({ json, text }) => {
@@ -33,42 +33,44 @@ const FollowByText = () => {
 
   return (
     <>
-      <h1>Following mode</h1>
+      <h1>Keep editing value</h1>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ width: '30%' }}>
           <h2>Source object</h2>
           <YamlEditor json={obj} onChange={handleChange} theme={oneDark} />
         </div>
         <div style={{ width: '30%' }}>
-          <h2>Current value</h2>
+          <h2>Source value</h2>
           <textarea style={{ width: '100%', height: 200 }} value={textValue} />
         </div>
         <div style={{ width: '30%' }}>
           <h2>Following editor</h2>
-          <YamlEditor text={textValue} theme={oneDark} key={textValue} />
+          <YamlEditor json={obj} theme={oneDark} />
         </div>
       </div>
     </>
   );
 };
 
-const FollowByObj = () => {
+const ResetEditedText = () => {
   const [jsonValue, setJsonValue] = React.useState(null);
 
-  const handleChange = ({ json, text }) => {
+  const handleChange = ({ json }) => {
     setJsonValue(json);
   };
 
+  const merge = React.useCallback(({ json }) => ({ json }), []);
+
   return (
     <>
-      <h1>Following mode</h1>
+      <h1>Swap current text with incoming value</h1>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ width: '30%' }}>
           <h2>Source object</h2>
           <YamlEditor json={obj} onChange={handleChange} theme={oneDark} />
         </div>
         <div style={{ width: '30%' }}>
-          <h2>Current value</h2>
+          <h2>Source value</h2>
           <textarea
             style={{ width: '100%', height: 200 }}
             value={JSON.stringify(jsonValue)}
@@ -76,11 +78,7 @@ const FollowByObj = () => {
         </div>
         <div style={{ width: '30%' }}>
           <h2>Following editor</h2>
-          <YamlEditor
-            json={jsonValue}
-            theme={oneDark}
-            key={JSON.stringify(jsonValue)}
-          />
+          <YamlEditor json={jsonValue || obj} theme={oneDark} merge={merge} />
         </div>
       </div>
     </>
@@ -90,8 +88,8 @@ const FollowByObj = () => {
 export default function Home() {
   return (
     <div>
-      <FollowByText />
-      <FollowByObj />
+      <KeepEditingText />
+      <ResetEditedText />
     </div>
   );
 }

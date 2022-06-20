@@ -22,17 +22,65 @@ const useErrors = (onError) => {
   };
 };
 
+const defaultMerge = ({ text, currentText }) => {
+  if (!currentText) {
+    return {
+      text,
+    };
+  }
+  return {
+    text: currentText,
+  };
+};
+
+const getMergedValue = ({ merge, json, text, currentText }) => {
+  if (!text && !currentText && !json) {
+    return '';
+  }
+  if (!text && !json) {
+    return currentText;
+  }
+  const shouldUpdate = merge({ json, text, currentText });
+
+  if (
+    shouldUpdate.text !== undefined &&
+    typeof shouldUpdate.text === 'string'
+  ) {
+    return shouldUpdate.text;
+  }
+  if (shouldUpdate.json) {
+    return yaml.dump(shouldUpdate.json);
+  }
+  throw new Error(
+    'merge function should return object with "text" or "json" fields',
+  );
+};
+
 const YamlEditor = ({
   json,
   text,
   theme,
   onError = () => {},
   onChange = () => {},
+  merge = defaultMerge,
 }) => {
   const errors = useErrors(onError);
   const textValue = json ? yaml.dump(json) : text;
   const currentText = React.useRef(textValue);
-  // const [currentText, setCurrentText] = React.useState(textValue);
+  const [key, setKey] = React.useState(0);
+
+  const mergedValue = getMergedValue({
+    merge,
+    json,
+    text,
+    currentText: currentText.current,
+  });
+
+  React.useEffect(() => {
+    if (mergedValue !== currentText.current) {
+      setKey(key + 1);
+    }
+  }, [mergedValue]);
 
   const handleChange = (newText) => {
     try {
@@ -73,11 +121,12 @@ const YamlEditor = ({
 
   return (
     <YamlInput
-      value={currentText.current}
+      value={mergedValue}
       onChange={handleChange}
       error={errors.error}
       getErrorPos={getErrorPos}
       options={{ handleTabs: true, theme }}
+      key={key}
     />
   );
 };
