@@ -2,6 +2,11 @@
 
 Yaml input field with validation and syntax highlighting as React Component
 
+![Example](https://raw.githubusercontent.com/focusreactive/headless-cms-yaml-input/master/react-yaml/examples/editor-screenshort.png)
+
+
+[Demo](https://headless-cms-yaml-input.vercel.app/)
+
 ## Install
 
 ```
@@ -9,9 +14,6 @@ npm i --save @focus-reactive/react-yaml
 yarn add @focus-reactive/react-yaml
 ```
 
-![example](examples/editor-screenshort.png)
-
-[Demo](https://headless-cms-yaml-input.vercel.app/)
 
 ## Usage
 
@@ -45,6 +47,13 @@ const handleChange = ({ json, text }) => {
 
 return <YamlEditor text={text} onChange={handleChange} />;
 ```
+
+## Features
+
+- themable (use Codemirror themes)
+- syntax and errors highlight
+- support working with text in YAML format or regular JS objects
+- controlled and uncontrolled mode
 
 ## API
 
