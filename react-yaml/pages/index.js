@@ -1,34 +1,16 @@
 import React from 'react';
 import { oneDark } from '@codemirror/theme-one-dark';
 import YamlEditor from '../src';
-
-const obj = {
-  foo: {
-    bar: 'a1',
-    dar: 'a2',
-    zar: 'a3',
-  },
-  items: [
-    {
-      x: 1,
-      y: 'blabla',
-    },
-    {
-      x: 2,
-      z: 'hellow world\n',
-    },
-    {
-      x: 3,
-    },
-  ],
-  newLine: 'blasdf\nblaslsls\n',
-};
+import { fullYamlText } from '../examples/full-yaml-text';
+import { shortYamlText } from '../examples/short-yaml-text';
 
 const KeepEditingText = () => {
   const [textValue, setTextValue] = React.useState('');
+  const [jsonValue, setJsonValue] = React.useState('');
 
   const handleChange = ({ json, text }) => {
     setTextValue(text);
+    setJsonValue(json);
   };
 
   return (
@@ -37,15 +19,29 @@ const KeepEditingText = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ width: '30%' }}>
           <h2>Source object</h2>
-          <YamlEditor json={obj} onChange={handleChange} theme={oneDark} />
+          <YamlEditor
+            text={shortYamlText}
+            onChange={handleChange}
+            theme={oneDark}
+          />
         </div>
         <div style={{ width: '30%' }}>
-          <h2>Source value</h2>
-          <textarea style={{ width: '100%', height: 200 }} value={textValue} />
+          <h2>Source text</h2>
+          <textarea
+            style={{ width: '100%', height: 200 }}
+            value={textValue}
+            readOnly
+          />
+          <h2>Source json</h2>
+          <textarea
+            style={{ width: '100%', height: 200 }}
+            value={JSON.stringify(jsonValue)}
+            readOnly
+          />
         </div>
         <div style={{ width: '30%' }}>
           <h2>Following editor</h2>
-          <YamlEditor json={obj} theme={oneDark} />
+          <YamlEditor json={jsonValue} theme={oneDark} key={!!jsonValue} />
         </div>
       </div>
     </>
@@ -53,9 +49,11 @@ const KeepEditingText = () => {
 };
 
 const ResetEditedText = () => {
-  const [jsonValue, setJsonValue] = React.useState(null);
+  const [textValue, setTextValue] = React.useState('');
+  const [jsonValue, setJsonValue] = React.useState('');
 
-  const handleChange = ({ json }) => {
+  const handleChange = ({ json, text }) => {
+    setTextValue(text);
     setJsonValue(json);
   };
 
@@ -67,18 +65,69 @@ const ResetEditedText = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ width: '30%' }}>
           <h2>Source object</h2>
-          <YamlEditor json={obj} onChange={handleChange} theme={oneDark} />
+          <YamlEditor
+            text={shortYamlText}
+            onChange={handleChange}
+            theme={oneDark}
+          />
         </div>
         <div style={{ width: '30%' }}>
           <h2>Source value</h2>
           <textarea
             style={{ width: '100%', height: 200 }}
+            value={textValue}
+            readOnly
+          />
+          <h2>Source json</h2>
+          <textarea
+            style={{ width: '100%', height: 200 }}
             value={JSON.stringify(jsonValue)}
+            readOnly
           />
         </div>
         <div style={{ width: '30%' }}>
           <h2>Following editor</h2>
-          <YamlEditor json={jsonValue || obj} theme={oneDark} merge={merge} />
+          <YamlEditor json={jsonValue} theme={oneDark} merge={merge} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+const TestSyntax = () => {
+  const [textValue, setTextValue] = React.useState('');
+  const [jsonValue, setJsonValue] = React.useState('');
+
+  const handleChange = ({ json, text }) => {
+    setTextValue(text);
+    setJsonValue(json);
+  };
+
+  return (
+    <>
+      <h1>Regression Test</h1>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+        }}
+      >
+        <div>
+          <h2>Source object</h2>
+          <YamlEditor
+            text={fullYamlText}
+            onChange={handleChange}
+            theme={oneDark}
+          />
+        </div>
+        <div>
+          <h2>Source json</h2>
+          <textarea
+            style={{ width: '100%', height: 200 }}
+            value={JSON.stringify(jsonValue)}
+            readOnly
+          />
         </div>
       </div>
     </>
@@ -90,6 +139,7 @@ export default function Home() {
     <div>
       <KeepEditingText />
       <ResetEditedText />
+      <TestSyntax />
     </div>
   );
 }

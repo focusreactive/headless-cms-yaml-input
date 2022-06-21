@@ -13,6 +13,7 @@
 /out/
 /pages
 /public
+/examples
 
 # production
 /build

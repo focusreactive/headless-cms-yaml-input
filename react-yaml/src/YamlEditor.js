@@ -69,12 +69,16 @@ const YamlEditor = ({
   const currentText = React.useRef(textValue);
   const [key, setKey] = React.useState(0);
 
-  const mergedValue = getMergedValue({
-    merge,
-    json,
-    text,
-    currentText: currentText.current,
-  });
+  const mergedValue = React.useMemo(
+    () =>
+      getMergedValue({
+        merge,
+        json,
+        text,
+        currentText: currentText.current,
+      }),
+    [json, text, merge],
+  );
 
   React.useEffect(() => {
     if (mergedValue !== currentText.current) {
