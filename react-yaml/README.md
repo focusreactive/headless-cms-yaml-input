@@ -9,6 +9,7 @@ npm i --save @focus-reactive/react-yaml
 yarn add @focus-reactive/react-yaml
 ```
 
+![example](examples/editor-screenshort.png)
 
 [Demo](https://headless-cms-yaml-input.vercel.app/)
 
