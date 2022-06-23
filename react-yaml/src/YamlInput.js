@@ -120,7 +120,7 @@ const YamlInput = ({
       errorHover,
       errorStripe(getErrorPos),
       zebraStripes(),
-      // theme,
+      theme,
     ].filter(Boolean);
 
     const state = EditorState.create({

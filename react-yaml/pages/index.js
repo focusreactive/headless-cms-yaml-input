@@ -22,7 +22,7 @@ const KeepEditingText = () => {
           <YamlEditor
             text={shortYamlText}
             onChange={handleChange}
-            theme={oneDark}
+            // theme={oneDark}
           />
         </div>
         <div style={{ width: '30%' }}>
@@ -41,7 +41,7 @@ const KeepEditingText = () => {
         </div>
         <div style={{ width: '30%' }}>
           <h2>Following editor</h2>
-          <YamlEditor json={jsonValue} theme={oneDark} key={!!jsonValue} />
+          <YamlEditor json={jsonValue} /* theme={oneDark} */ key={!!jsonValue} />
         </div>
       </div>
     </>
