@@ -8,6 +8,7 @@ import { StateField, StateEffect } from '@codemirror/state';
 import { Tooltip, hoverTooltip } from '@codemirror/tooltip';
 import { zebraStripes } from './extensions/zebra-stripes';
 import { errorStripe } from './extensions/error-stripe';
+import { getCurrentWord } from './model';
 
 // Effects can be attached to transactions to communicate with the extension
 const addMarks = StateEffect.define();
@@ -54,6 +55,8 @@ const errorMark = Decoration.mark({
 const YamlInput = ({
   value = '',
   onChange = () => null,
+  onSelect = () => null,
+  onSetCursor = () => null,
   error,
   options: { theme = undefined, handleTabs = false } = {},
   getErrorPos,
@@ -61,6 +64,8 @@ const YamlInput = ({
   const mount = React.useRef(null);
   const view = React.useRef(null);
   const currentValue = React.useRef(value);
+  const currentSelection = React.useRef('');
+  const currentUnderCursorWord = React.useRef('');
 
   const handleErrors = () => {
     view.current.dispatch({
@@ -83,6 +88,20 @@ const YamlInput = ({
 
   const handleChange = (viewUpdate) => {
     const newValue = viewUpdate.state.doc.toString();
+    const selection = viewUpdate.state?.selection?.ranges[0] || {};
+    const { from, to } = selection;
+    const selected = newValue.slice(from, to);
+    const underCursor = from === to ? getCurrentWord(newValue, from) : {};
+
+    if (selected !== currentSelection.current) {
+      currentSelection.current = selected;
+      onSelect({ selected, from, to });
+    }
+
+    if (underCursor.word !== currentUnderCursorWord.current) {
+      currentUnderCursorWord.current = underCursor.word;
+      onSetCursor(underCursor);
+    }
 
     if (newValue !== currentValue.current) {
       currentValue.current = newValue;

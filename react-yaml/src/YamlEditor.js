@@ -62,6 +62,8 @@ const YamlEditor = ({
   theme,
   onError = () => {},
   onChange = () => {},
+  onSelect = () => {},
+  onSetCursor = () => {},
   merge = defaultMerge,
 }) => {
   const errors = useErrors(onError);
@@ -111,6 +113,14 @@ const YamlEditor = ({
     }
   };
 
+  const handleSelect = (selected) => {
+    onSelect(selected);
+  };
+
+  const handleSetCursor = (underCursor) => {
+    onSetCursor(underCursor);
+  };
+
   const getErrorPos = (newText) => {
     try {
       yaml.load(newText);
@@ -127,6 +137,8 @@ const YamlEditor = ({
     <YamlInput
       value={mergedValue}
       onChange={handleChange}
+      onSelect={handleSelect}
+      onSetCursor={handleSetCursor}
       error={errors.error}
       getErrorPos={getErrorPos}
       options={{ handleTabs: true, theme }}
