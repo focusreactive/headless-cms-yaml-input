@@ -56,16 +56,20 @@ const getMergedValue = ({ merge, json, text, currentText }) => {
   );
 };
 
-const YamlEditor = ({
-  json,
-  text,
-  theme,
-  onError = () => {},
-  onChange = () => {},
-  onSelect = () => {},
-  onSetCursor = () => {},
-  merge = defaultMerge,
-}) => {
+const YamlEditor = (
+  {
+    json,
+    text,
+    theme,
+    onError = () => {},
+    onChange = () => {},
+    onSelect = () => {},
+    onSetCursor = () => {},
+    merge = defaultMerge,
+  },
+  ref,
+) => {
+  const actionsRef = React.useRef(null);
   const errors = useErrors(onError);
   const textValue = json ? yaml.dump(json) : text;
   const currentText = React.useRef(textValue);
@@ -113,6 +117,23 @@ const YamlEditor = ({
     }
   };
 
+  const replaceValue = (val) => {
+    if (!val.json && !val.text) {
+      return;
+    }
+    const newText = val.json ? yaml.dump(val.json) : val.text;
+    actionsRef.current.actionNewDoc({ text: newText });
+  };
+
+  const actions = {
+    replaceValue,
+  };
+
+  if (ref) {
+    // eslint-disable-next-line no-param-reassign
+    ref.current = actions;
+  }
+
   const handleSelect = (selected) => {
     onSelect(selected);
   };
@@ -143,8 +164,9 @@ const YamlEditor = ({
       getErrorPos={getErrorPos}
       options={{ handleTabs: true, theme }}
       key={key}
+      ref={actionsRef}
     />
   );
 };
 
-export default YamlEditor;
+export default React.forwardRef(YamlEditor);
