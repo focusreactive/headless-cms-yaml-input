@@ -4,7 +4,6 @@ Yaml input field with validation and syntax highlighting as React Component
 
 ![Example](https://raw.githubusercontent.com/focusreactive/headless-cms-yaml-input/master/react-yaml/examples/editor-screenshort.png)
 
-
 [Demo](https://headless-cms-yaml-input.vercel.app/)
 
 ## Install
@@ -13,7 +12,6 @@ Yaml input field with validation and syntax highlighting as React Component
 npm i --save @focus-reactive/react-yaml
 yarn add @focus-reactive/react-yaml
 ```
-
 
 ## Usage
 
@@ -79,6 +77,22 @@ onChange({ json, text });
 
 where: `text` is a last valid text editing in Editor, `json` is JS equivalent.
 
+**onSelect** - a callback triggered on text selection. It will be launched with the following parameters:
+
+```js
+onSelect({ selected, from, to });
+```
+
+where: `selected` - is a selected text, `from` and `to` - selection positions
+
+**onSetCursor** - a callback triggered when user moves or set cursor on any word in the Editor. It will be launched with the following parameters:
+
+```js
+onSetCursor({ word, from, to });
+```
+
+where: `word` - is a word separated by whitespaces, `from` and `to` - word start and end positions
+
 **onError** - a callback triggered on any **INVALID** code changes in the Editor. It will be launched with the following parameters:
 
 ```js
@@ -98,6 +112,35 @@ where `json` - the new json prop, `text` the new text prop, and `currentText` is
 It should return an object with one of the keys: `json` or `text` which should contain new text of js value.
 
 By default it returns `currentText`
+
+#### Actions - allow to manipulate Editor in imperative form
+
+All actions are available by a `ref` prop **after** the Editor is maintained:
+
+```js
+const EditorWithActions = () => {
+  const actions = React.useRef(null);
+
+  React.useEffect(() => {
+    // Here we have access to imperative actions
+    actions.current.replaceValue({ json: { foo: 'updatedValue' } });
+  }, []);
+
+  return (
+    <div>
+      <YamlEditor json={{ foo: 'initValue' }} ref={actions} />
+    </div>
+  );
+};
+```
+
+Currently available the following actions:
+
+**replaceValue** - replace entire Editor content with a new value (json or text)
+
+```js
+replaceValue({ json, text });
+```
 
 ## Credits
 

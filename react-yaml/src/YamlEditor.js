@@ -73,7 +73,14 @@ const YamlEditor = (
   const errors = useErrors(onError);
   const textValue = json ? yaml.dump(json) : text;
   const currentText = React.useRef(textValue);
-  const [key, setKey] = React.useState(0);
+
+  const replaceValue = (val) => {
+    if (!val.json && !val.text) {
+      return;
+    }
+    const newText = val.json ? yaml.dump(val.json) : val.text;
+    actionsRef.current.actionNewDoc({ text: newText });
+  };
 
   const mergedValue = React.useMemo(
     () =>
@@ -88,7 +95,7 @@ const YamlEditor = (
 
   React.useEffect(() => {
     if (mergedValue !== currentText.current) {
-      setKey(key + 1);
+      replaceValue({ text: mergedValue });
     }
   }, [mergedValue]);
 
@@ -115,14 +122,6 @@ const YamlEditor = (
         snippet: err.mark.snippet,
       });
     }
-  };
-
-  const replaceValue = (val) => {
-    if (!val.json && !val.text) {
-      return;
-    }
-    const newText = val.json ? yaml.dump(val.json) : val.text;
-    actionsRef.current.actionNewDoc({ text: newText });
   };
 
   const actions = {
@@ -163,7 +162,6 @@ const YamlEditor = (
       error={errors.error}
       getErrorPos={getErrorPos}
       options={{ handleTabs: true, theme }}
-      key={key}
       ref={actionsRef}
     />
   );

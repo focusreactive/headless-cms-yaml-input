@@ -4,7 +4,7 @@ import { yaml } from '@codemirror/legacy-modes/mode/yaml';
 import { EditorView, EditorState, basicSetup } from '@codemirror/basic-setup';
 import { keymap, Range, Decoration } from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
-import { StateField, StateEffect, Text } from '@codemirror/state';
+import { StateField, StateEffect, EditorSelection } from '@codemirror/state';
 import { Tooltip, hoverTooltip } from '@codemirror/tooltip';
 import { zebraStripes } from './extensions/zebra-stripes';
 import { errorStripe } from './extensions/error-stripe';
@@ -71,20 +71,22 @@ const YamlInput = React.forwardRef(
     const currentSelection = React.useRef('');
     const currentUnderCursorWord = React.useRef('');
 
-    const actionReplace = ({ text, from }) => {
-      const to = from + text.length;
+    const actionReplace = ({ text, from, to }) => {
+      const toCalc = to || from + text.length;
 
       view.current.dispatch({
-        changes: { from, to, insert: text },
+        changes: { from, to: toCalc, insert: text },
       });
     };
 
     const actionNewDoc = ({ text }) => {
       const currentText = view.current.state.doc.toString();
+      const currentPos = view.current.state.selection.ranges[0].from;
       const to = currentText.length;
 
       view.current.dispatch({
         changes: { from: 0, to, insert: text },
+        selection: EditorSelection.cursor(currentPos),
       });
     };
 
