@@ -100,13 +100,12 @@ const YamlEditor = (
   }, [mergedValue]);
 
   const handleChange = (newText) => {
+    errors.cleanErrors();
+    onError(null);
+    
     try {
       currentText.current = newText;
       const newJson = yaml.load(newText);
-      if (errors.hasErrors) {
-        errors.cleanErrors();
-        onError(null);
-      }
 
       onChange({ json: newJson, text: newText });
     } catch (err) {
