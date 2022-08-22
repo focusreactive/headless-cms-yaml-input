@@ -1,5 +1,5 @@
 {
-  "name": "@focus-reactive/graphcms-yaml-input",
+  "name": "@focus-reactive/hygraph-yaml",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -78,7 +78,8 @@
     "codemirror",
     "js-yaml",
     "react-yaml",
-    "graphcms",
+    "hygraph",
+    "headless",
     "headless",
     "cms",
     "custom input"

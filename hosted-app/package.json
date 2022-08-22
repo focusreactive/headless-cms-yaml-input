@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:dependencies": "cd ../react-yaml && yarn prepare && cd ../graphcms-yaml-input && yarn prepare",
+    "build:dependencies": "cd ../react-yaml && yarn prepare && cd ../hygraph-yaml-field-ui-extension && yarn prepare",
     "dev": "nodemon --exec next dev",
     "prebuild": "yarn build:dependencies",
     "build": "next build",
@@ -13,7 +13,7 @@
   "dependencies": {
     "@codemirror/theme-one-dark": "^0.19.0",
     "@focus-reactive/react-yaml": "^1.1.0",
-    "@focus-reactive/graphcms-yaml-input": "^1.0.0",
+    "@focus-reactive/hygraph-yaml": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

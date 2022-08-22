@@ -9,12 +9,11 @@
 			"path": "contentful-yaml-input"
 		},
 		{
-			"name": "graphcms-yaml-input",
-			"path": "graphcms-yaml-input"
-		},
-		{
 			"name": "react-yaml",
 			"path": "react-yaml"
+		},
+		{
+			"path": "hygraph-yaml-field-ui-extension"
 		}
 	],
 	"settings": {

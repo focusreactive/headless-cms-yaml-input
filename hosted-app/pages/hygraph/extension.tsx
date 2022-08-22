@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { NextPage } from "next";
-import YamlInput from "@focus-reactive/graphcms-yaml-input";
+import YamlInput from "@focus-reactive/hygraph-yaml";
 
 const ExtensionApp: NextPage = () => {
   return (

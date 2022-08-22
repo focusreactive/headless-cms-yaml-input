@@ -2,7 +2,7 @@
   "private": true,
   "workspaces": [
     "react-yaml",
-    "graphcms-yaml-input",
+    "hygraph-yaml-field-ui-extension",
     "contentful-yaml-input",
     "sanity-yaml-input",
     "storyblok",
